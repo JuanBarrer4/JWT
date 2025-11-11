@@ -1,9 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from .database import lifespan
 from .api import decode, validate, sign
 from .api import verify
 
-app = FastAPI(title="JWT Analyzer LF 2025-2 (local)")
+
+# Se integra la conexión MongoDB con el lifespan
+app = FastAPI(title="JWT Analyzer LF 2025-2 (local)", lifespan=lifespan)
+
 
 # Angular dev server corre por defecto en http://localhost:4200
 app.add_middleware(
