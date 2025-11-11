@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .database import lifespan
+from core.database import lifespan
 from .api import decode, validate, sign
 from .api import verify
 
