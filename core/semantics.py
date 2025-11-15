@@ -18,7 +18,7 @@ def validate_semantics(h_b64: str, p_b64: str, now: int | None = None) -> dict:
     if header.get("alg") not in {"HS256", "HS384"}:
         raise ValueError("Algoritmo no soportado en este prototipo")
 
-    # Claims temporales si existen: enteros tipo UNIX epoch
+    # Claims temporales.
     for c in ("exp", "nbf", "iat"):
         if c in payload and not isinstance(payload[c], int):
             raise ValueError(f"Claim {c} debe ser entero (epoch)")

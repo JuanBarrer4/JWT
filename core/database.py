@@ -3,12 +3,12 @@ from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
 # URI de conexión al cluster de MongoDB Atlas
-MONGO_URI = "mongodb+srv://information:DAElxC1ePXGkfNTx@cluster0.kirnqlk.mongodb.net/"
+MONGO_URI = "mongodb+srv://alissonpaez_db_user:YmtuUGE8Ye0hw5Mj@cluster0.qdjnp84.mongodb.net/?appName=Cluster0"
 
 # Nombre de la base de datos
-DATABASE_NAME = "JWT_Analyzer"
+DATABASE_NAME = "JWT_Analyzer_DB"
 
-# Variables globales
+
 client: AsyncIOMotorClient = None
 db = None
 
@@ -18,7 +18,7 @@ async def lifespan(app: FastAPI):
     client = AsyncIOMotorClient(MONGO_URI)
     db = client[DATABASE_NAME]
     print("Conectado con MongoDB")
-    yield  # Aquí corre la aplicación mientras está activa
+    yield  
     client.close()
     print("Conexión con MongoDB cerrada")
 
@@ -28,7 +28,7 @@ def get_database():
     return db
 
 
-# Inicializa la app con el lifespan integrado
+# lifespan para inicializar la app.
 def create_app():
     app = FastAPI(title="JWT Analyzer LF 2025-2 (local)", lifespan=lifespan)
     return app

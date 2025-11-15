@@ -5,8 +5,8 @@ from services.verifier_service import verify_token
 router = APIRouter(prefix="/verify", tags=["verify"])
 
 @router.post("")
-def verify(req: VerifyRequest):
+async def verify(req: VerifyRequest):
     try:
-        return verify_token(req.token, req.secret)
+        return await verify_token(req.token, req.secret)
     except Exception as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(status_code=400, detail=str(e))

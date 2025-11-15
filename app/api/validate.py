@@ -5,8 +5,8 @@ from services.validator_service import validate_token
 router = APIRouter(prefix="/validate", tags=["validate"])
 
 @router.post("")
-def validate(req: DecodeRequest):
+async def validate(req: DecodeRequest):
     try:
         return validate_token(req.token)
     except Exception as e:
-        raise HTTPException(400, str(e))
+        raise HTTPException(status_code=400, detail=str(e))
